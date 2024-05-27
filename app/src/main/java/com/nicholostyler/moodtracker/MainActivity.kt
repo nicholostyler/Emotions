@@ -11,8 +11,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -119,10 +121,33 @@ fun DashboardWeekSummary()
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListOfEntries()
 {
+    LazyColumn {
+        items(10) { index ->
+            EntryCard(date = "Feb 5", title = "Snow Day", description =  "A snowy day today.")
+        }
 
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun EntryCard(date: String, title: String, description: String)
+{
+    Card(
+        onClick = { /*TODO*/ },
+        modifier = Modifier
+            .height(height = 100.dp)
+            .fillMaxWidth()
+            .padding(start = 8.dp, top = 8.dp)
+    ) {
+        Text(text = date)
+        Text(text = title)
+        Text(text = description)
+    }
 }
 
 
@@ -132,10 +157,11 @@ fun DashboardPane()
     // Main page of the app
     Column(modifier = Modifier.fillMaxSize()){
         Text(text = "Good Morning,")
-        Text(text = "Nicholos")
+        Text(text = "Nicholos Tyler")
         DashboardQuickAddMood()
         DashboardWeekSummary()
         Text("Recent Entries")
+        ListOfEntries()
     }
 }
 
